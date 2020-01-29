@@ -1,4 +1,6 @@
 bin/
 obj/
 001_PersonalBudget.*
-
+users.xml
+incomes.xml
+expenses.xml
