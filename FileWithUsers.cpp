@@ -4,123 +4,72 @@ using namespace std;
 
 void FileWithUsers::addUserToFile(User user)
 {
-    string lineWithUserData = "";
-    fstream textFile;
+    CMarkup xmlFile;
 
-    textFile.open(getFileName().c_str(), ios::app);
+    bool fileExists = xmlFile.Load(getFileName().c_str());
 
-    if (textFile.good() == true)
+     if (!fileExists)
     {
-        lineWithUserData = replaceUserDataOnRopeWithDataSeparatedByVerticalDashes(user);
-
-        if (checkIfFileIsEmpty() == true)
-        {
-            textFile << lineWithUserData;
-        }
-        else
-        {
-            textFile << endl << lineWithUserData ;
-        }
+        xmlFile.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+        xmlFile.AddElem("Users");
     }
-    else
-        cout << "Nie udalo sie otworzyc pliku " << getFileName() << " i zapisac w nim danych." << endl;
-    textFile.close();
-}
 
-string FileWithUsers::replaceUserDataOnRopeWithDataSeparatedByVerticalDashes(User user)
-{
-    string lineWithUserData = "";
+    xmlFile.FindElem();
+    xmlFile.IntoElem();
+    xmlFile.AddElem("User");
+    xmlFile.IntoElem();
+    xmlFile.AddElem("UserId", user.getId());
+    xmlFile.AddElem("Login", user.getLogin());
+    xmlFile.AddElem("Password", user.getPassword());
 
-    lineWithUserData += AuxiliaryMethods::conversionIntToString(user.getId())+ '|';
-    lineWithUserData += user.getLogin() + '|';
-    lineWithUserData += user.getPassword() + '|';
-
-    return lineWithUserData;
+    xmlFile.Save(getFileName().c_str());
 }
 
 vector <User> FileWithUsers::getUsersFromFile()
 {
-    string oneUserDataSeparatedByVerticalDashes = "";
     User user;
-    vector <User> users;
-    fstream textFile;
+    vector<User> users;
+    CMarkup xmlFile;
 
-    textFile.open(getFileName().c_str(), ios::in);
+    xmlFile.Load(getFileName().c_str());
 
-    if (textFile.good() == true)
+    xmlFile.FindElem();
+    xmlFile.IntoElem();
+
+    while(xmlFile.FindElem("User"))
     {
-        while (getline(textFile, oneUserDataSeparatedByVerticalDashes))
-        {
-            user = getUserData(oneUserDataSeparatedByVerticalDashes);
-            users.push_back(user);
-        }
+        xmlFile.IntoElem();
+        xmlFile.FindElem("UserId");
+        user.setId(AuxiliaryMethods::conversionStringToInt(MCD_2PCSZ(xmlFile.GetData())));
+        xmlFile.FindElem("Login");
+        user.setLogin(xmlFile.GetData());
+        xmlFile.FindElem("Password");
+        user.setPassword(xmlFile.GetData());
+        xmlFile.OutOfElem();
+
+        users.push_back(user);
     }
-    textFile.close();
 
     return users;
 }
 
-User FileWithUsers::getUserData(string oneUserDataSeparatedByVerticalDashes)
-{
-    User user;
-    string singleUserData = "";
-    int singleUserDataNumber = 1;
-
-    for (int characterPosition = 0; characterPosition < oneUserDataSeparatedByVerticalDashes.length(); characterPosition++)
-    {
-        if (oneUserDataSeparatedByVerticalDashes[characterPosition] != '|')
-        {
-            singleUserData += oneUserDataSeparatedByVerticalDashes[characterPosition];
-        }
-        else
-        {
-            switch(singleUserDataNumber)
-            {
-            case 1:
-                user.setId(atoi(singleUserData.c_str()));
-                break;
-            case 2:
-                user.setLogin(singleUserData);
-                break;
-            case 3:
-                user.setPassword(singleUserData);
-                break;
-            }
-            singleUserData = "";
-            singleUserDataNumber++;
-        }
-    }
-    return user;
-}
-
 void FileWithUsers::saveAllUsersToFile(vector <User> &users)
 {
-    fstream textFile;
-    string lineWithUserData = "";
-    vector <User>::iterator itrEnd = --users.end();
+    CMarkup xmlFile;
 
-    textFile.open(getFileName().c_str(), ios::out);
+    xmlFile.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+    xmlFile.AddElem("Users");
+    xmlFile.IntoElem();
 
-    if (textFile.good() == true)
+    for(vector<User>::iterator itr = users.begin(); itr != users.end(); itr++)
     {
-        for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++)
-        {
-            lineWithUserData = replaceUserDataOnRopeWithDataSeparatedByVerticalDashes(*itr);
+        xmlFile.AddElem("User");
+        xmlFile.IntoElem();
+        xmlFile.AddElem("UserId", itr -> getId());
+        xmlFile.AddElem("Login", itr -> getLogin());
+        xmlFile.AddElem("Password", itr -> getPassword());
+        xmlFile.OutOfElem();
+    }
 
-            if (itr == itrEnd)
-            {
-               textFile << lineWithUserData;
-            }
-            else
-            {
-                textFile << lineWithUserData << endl;
-            }
-            lineWithUserData = "";
-        }
-    }
-    else
-    {
-        cout << "Nie mozna otworzyc pliku " << getFileName() << endl;
-    }
-    textFile.close();
+        xmlFile.Save(getFileName().c_str());
 }
