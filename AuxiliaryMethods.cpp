@@ -82,3 +82,11 @@ int AuxiliaryMethods::loadIntiger()
     }
     return number;
 }
+
+string AuxiliaryMethods::conversionDoubleToString(double number)
+{
+    stringstream ss;
+    ss << number;
+    string str = ss.str();
+    return str;
+}

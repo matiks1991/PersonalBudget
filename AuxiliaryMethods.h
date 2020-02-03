@@ -17,6 +17,7 @@ public:
     static string downloadNumber(string text, int characterPosition);
     static char loadCharacter();
     static int loadIntiger();
+    static string conversionDoubleToString(double number);
 };
 
 #endif
