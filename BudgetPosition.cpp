@@ -14,7 +14,7 @@
 
     void BudgetPosition::setDate(string newDate)
     {
-        if(newDate.size() == 8)
+        if(newDate.size() == 10)
             date = newDate;
     }
 
