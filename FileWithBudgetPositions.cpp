@@ -21,7 +21,7 @@ bool FileWithBudgetPositions::addBudgetPositions(BudgetPosition budgetPosition)
     xmlFile.IntoElem();
     xmlFile.AddElem("Id", budgetPosition.getId());
     xmlFile.AddElem("UserId", budgetPosition.getUserId());
-    xmlFile.AddElem("Date", budgetPosition.getDate());
+    xmlFile.AddElem("Date", OperationsOnDates::convertDateIntToString(budgetPosition.getDate()));
     xmlFile.AddElem("Item", budgetPosition.getItem());
     xmlFile.AddElem("Amount", AuxiliaryMethods::conversionDoubleToString(budgetPosition.getAmount()));
 
@@ -65,7 +65,7 @@ vector<BudgetPosition> FileWithBudgetPositions::getBudgetPositionsOfLoggedInUser
         }
 
         xmlFile.FindElem("Date");
-        budgetPosition.setDate(xmlFile.GetData());
+        budgetPosition.setDate(OperationsOnDates::convertDateStringToInt(xmlFile.GetData()));
         xmlFile.FindElem("Item");
         budgetPosition.setItem(xmlFile.GetData());
         xmlFile.FindElem("Amount");

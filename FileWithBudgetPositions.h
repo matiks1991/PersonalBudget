@@ -11,6 +11,7 @@
 #include "AuxiliaryMethods.h"
 #include "TextFile.h"
 #include "Markup.h"
+#include "OperationsOnDates.h"
 
 using namespace std;
 

@@ -12,9 +12,9 @@
             userId = newUserId;
     }
 
-    void BudgetPosition::setDate(string newDate)
+    void BudgetPosition::setDate(int newDate)
     {
-        if(newDate.size() == 10)
+        if(AuxiliaryMethods::conversionIntToString(newDate).size() == 8)
             date = newDate;
     }
 
@@ -39,7 +39,7 @@
         return userId;
     }
 
-    string BudgetPosition::getDate()
+    int BudgetPosition::getDate()
     {
         return date;
     }
