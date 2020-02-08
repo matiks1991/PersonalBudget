@@ -17,7 +17,7 @@ using namespace std;
 class FileWithBudgetPositions : public TextFile
 {
     public:
-    FileWithBudgetPositions(string FILENAMEWITHBUDGETPOSITIONS) : TextFile(FILENAMEWITHBUDGETPOSITIONS);
+    FileWithBudgetPositions(string FILENAMEWITHBUDGETPOSITIONS) : TextFile(FILENAMEWITHBUDGETPOSITIONS){};
     bool addBudgetPositions(BudgetPosition budgetPosition);
     vector<BudgetPosition> getBudgetPositionsOfLoggedInUserFromFile(int idLoggedInUser);
     int getLastBudgetPositionIdFromFile();
