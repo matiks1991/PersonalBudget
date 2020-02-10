@@ -98,11 +98,11 @@ void PersonalBudget::addExpense()
     }
 }
 
-void PersonalBudget::balanceFromCurrentMonth()
+void PersonalBudget::viewBalanceForCurrentMonth()
 {
     if(managerUser.checkIfUserIsLoggedIn())
     {
-//        managerBudget->balanceFromCurrentMonth();
+        managerBudget->viewBalanceForCurrentMonth();
     }
     else
     {
@@ -111,11 +111,11 @@ void PersonalBudget::balanceFromCurrentMonth()
     }
 }
 
-void PersonalBudget::balanceFromPreviousMonth()
+void PersonalBudget::viewBalanceForPreviousMonth()
 {
     if(managerUser.checkIfUserIsLoggedIn())
     {
-//        managerBudget->balanceFromPreviousMonth();
+//        managerBudget->viewBalanceForPreviousMonth();
     }
     else
     {
@@ -124,11 +124,11 @@ void PersonalBudget::balanceFromPreviousMonth()
     }
 }
 
-void PersonalBudget::balanceFromSelectedPeriod()
+void PersonalBudget::viewBalanceForSelectedPeriod()
 {
     if(managerUser.checkIfUserIsLoggedIn())
     {
-//        managerBudget->balanceFromSelectedPeriod();
+//        managerBudget->viewBalanceForSelectedPeriod();
     }
     else
     {

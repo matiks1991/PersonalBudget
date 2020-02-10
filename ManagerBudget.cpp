@@ -113,6 +113,67 @@ string ManagerBudget::changeCommaToDot(string amount)
     return amountWithDot;
 }
 
+void ManagerBudget::viewBalance(int startingDate, int endDate)
+{
+    double totalIncome=0, totalExpense=0, endResult=0;
+
+    incomes = OperationsOnDates::sortingItemsByDate(incomes);
+    expenses = OperationsOnDates::sortingItemsByDate(expenses);
+
+    cout.setf(ios::fixed);
+    cout << setprecision(2);
+
+    cout << endl << "----------------PRZYCHODY-----------------" << endl << endl;
+
+    for(vector<BudgetPosition>::iterator itr=incomes.begin(); itr!=incomes.end(); itr++)
+    {
+        if(startingDate<=itr->getDate() &&  itr->getDate()<=endDate)
+        {
+            cout << OperationsOnDates::convertDateIntToString(itr->getDate()) << "  Kwota:" <<
+            itr->getAmount()<< endl << "            Pozycja:" << itr->getItem() << endl;
+            totalIncome += itr->getAmount();
+        }
+    }
+
+    cout << endl << "-----------------WYDATKI------------------" << endl << endl;
+
+    for(vector<BudgetPosition>::iterator itr=expenses.begin(); itr!=expenses.end(); itr++)
+    {
+        if(startingDate<=itr->getDate() &&  itr->getDate()<=endDate)
+        {
+            cout << OperationsOnDates::convertDateIntToString(itr->getDate()) << "  Kwota:" <<
+            itr->getAmount()<< endl << "            Pozycja:" << itr->getItem() << endl;
+            totalExpense += itr->getAmount();
+        }
+    }
+
+    endResult = totalIncome - totalExpense;
+    cout << endl << "---------------PODSUMOWANIE---------------" << endl;
+    cout << endl << "Przychody: " << totalIncome << endl;
+    cout << "Wydatki:   " << totalExpense << endl;
+    cout << "Bilans:    " << endResult << endl;
+}
+
+void ManagerBudget::viewBalanceForCurrentMonth()
+{
+    int beginningOfMonth;
+
+    system("cls");
+    if(!incomes.empty() || !expenses.empty())
+    {
+        beginningOfMonth = OperationsOnDates::getSystemDate()/100*100;
+
+        cout << "$~~~~~~~~BILANS Z AKTUALNEGO MIESIACA~~~~~~~~$" << endl;
+
+        viewBalance(beginningOfMonth, OperationsOnDates::getSystemDate());
+    }
+    else
+        cout << endl << "Nie wprowadzono zadnych pozycji w budzecie osobistym!" << endl << endl;
+
+    system("pause");
+}
+
+
 void ManagerBudget::wyswietlWszystkichAdresatow()
 {
     system("cls");

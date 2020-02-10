@@ -43,13 +43,13 @@ int main()
                 personalBudget.addExpense();
                 break;
             case '3':
-                personalBudget.balanceFromCurrentMonth();
+                personalBudget.viewBalanceForCurrentMonth();
                 break;
             case '4':
-                personalBudget.balanceFromPreviousMonth();
+                personalBudget.viewBalanceForPreviousMonth();
                 break;
             case '5':
-                personalBudget.balanceFromSelectedPeriod();
+                personalBudget.viewBalanceForSelectedPeriod();
                 break;
             case '6':
                 personalBudget.changingUserPasword();
@@ -60,7 +60,6 @@ int main()
             }
         }
     }
-//    personalBudget.viewAllUsers();
 
     return 0;
 }

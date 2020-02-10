@@ -53,9 +53,9 @@ bool OperationsOnDates::checkDateIsCorrect(string dateString)
 
     dateInt = (dateTm.tm_year+1900) * 10000 + (dateTm.tm_mon+1) * 100 + dateTm.tm_mday;
 
-    cout << "Tyle dni w tym miesiacu:" << howManyDaysInMonth(dateTm) << endl;
+    cout << "Tyle dni w tym miesiacu:" << countHowManyDaysInMonth(dateTm) << endl;
 
-    if(getSystemDate()<dateInt || dateTm.tm_year<100 || dateTm.tm_mon>11 || dateTm.tm_mday>howManyDaysInMonth(dateTm))
+    if(getSystemDate()<dateInt || dateTm.tm_year<100 || dateTm.tm_mon>11 || dateTm.tm_mday>countHowManyDaysInMonth(dateTm))
         return false;
 
     return true;
@@ -155,7 +155,7 @@ bool OperationsOnDates::isItLeapYear(int year)
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
-int OperationsOnDates::howManyDaysInMonth(tm dateTm)
+int OperationsOnDates::countHowManyDaysInMonth(tm dateTm)
 {
     int month = dateTm.tm_mon+1;
     int year = dateTm.tm_year+1900;
@@ -171,3 +171,17 @@ int OperationsOnDates::howManyDaysInMonth(tm dateTm)
     else
     return 31;
 }
+
+bool OperationsOnDates::compareDates(BudgetPosition &firstDate, BudgetPosition &secondDate)
+{
+    return (firstDate.getDate()<secondDate.getDate());
+}
+
+vector<BudgetPosition> OperationsOnDates::sortingItemsByDate(vector<BudgetPosition> budgetPositions)
+{
+    sort(budgetPositions.begin(), budgetPositions.end(), compareDates);
+
+    return budgetPositions;
+}
+
+

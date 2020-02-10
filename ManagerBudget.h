@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <iomanip>
 
 #include "BudgetPosition.h"
 #include "FileWithBudgetPositions.h"
@@ -22,6 +23,9 @@ class ManagerBudget
     int dateInputMenu();
     double amountInputMenu();
     string changeCommaToDot(string amountString);
+    void viewBalance(int startingDate, int endDate);
+
+
 //    void wyswietlDaneAdresata(Adresat adresat);
     int podajIdWybranegoAdresata();
     void podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata();
@@ -37,6 +41,9 @@ public:
     };
     void addIncome();
     void addExpense();
+    void viewBalanceForCurrentMonth();
+    void viewBalanceForPreviousMonth();
+    void viewBalanceForSelectedPeriod();
     void wyswietlWszystkichAdresatow();
     void wczytajAdresatowZalogowanegoUzytkownikaZPliku();
     void usunAdresata();

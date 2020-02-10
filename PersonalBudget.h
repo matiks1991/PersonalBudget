@@ -31,9 +31,9 @@ public:
     void userLogout();
     void addIncome();
     void addExpense();
-    void balanceFromCurrentMonth();
-    void balanceFromPreviousMonth();
-    void balanceFromSelectedPeriod();
+    void viewBalanceForCurrentMonth();
+    void viewBalanceForPreviousMonth();
+    void viewBalanceForSelectedPeriod();
     int getIdOfLoggedInUser();
     char chooseOptionFromMainMenu();
     char chooseOptionFromUserMenu();
