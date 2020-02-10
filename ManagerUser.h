@@ -33,6 +33,8 @@ public:
     int getIdOfLoggedInUser();
     void setIdOfLoggedInUser(int noweId);
     bool checkIfUserIsLoggedIn();
+    string getNameOfLoggedInUser();
+    string getSurnameOfLoggedInUser();
 };
 
 #endif

@@ -21,6 +21,8 @@ void FileWithUsers::addUserToFile(User user)
     xmlFile.AddElem("UserId", user.getId());
     xmlFile.AddElem("Login", user.getLogin());
     xmlFile.AddElem("Password", user.getPassword());
+    xmlFile.AddElem("Name", user.getName());
+    xmlFile.AddElem("Surname", user.getSurname());
 
     xmlFile.Save(getFileName().c_str());
 }
@@ -45,6 +47,10 @@ vector <User> FileWithUsers::getUsersFromFile()
         user.setLogin(xmlFile.GetData());
         xmlFile.FindElem("Password");
         user.setPassword(xmlFile.GetData());
+        xmlFile.FindElem("Name");
+        user.setName(xmlFile.GetData());
+        xmlFile.FindElem("Surname");
+        user.setSurname(xmlFile.GetData());
         xmlFile.OutOfElem();
 
         users.push_back(user);
@@ -68,6 +74,8 @@ void FileWithUsers::saveAllUsersToFile(vector <User> &users)
         xmlFile.AddElem("UserId", itr -> getId());
         xmlFile.AddElem("Login", itr -> getLogin());
         xmlFile.AddElem("Password", itr -> getPassword());
+        xmlFile.AddElem("Name", itr -> getName());
+        xmlFile.AddElem("Surname", itr -> getSurname());
         xmlFile.OutOfElem();
     }
 

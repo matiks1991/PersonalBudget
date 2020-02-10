@@ -23,7 +23,7 @@ char PersonalBudget::chooseOptionFromUserMenu()
     char choice;
 
     system("cls");
-    cout << " >>> MENU UZYTKOWNIKA <<<" << endl;
+    cout << " >>> MENU UZYTKOWNIKA: " << managerUser.getNameOfLoggedInUser() << " " << managerUser.getSurnameOfLoggedInUser() << " <<<" << endl;
     cout << "$--------------------------------$" << endl;
     cout << "1. Dodaj przychod" << endl;
     cout << "2. Dodaj wydatek" << endl;

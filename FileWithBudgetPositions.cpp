@@ -88,7 +88,7 @@ int FileWithBudgetPositions::getLastBudgetPositionIdFromFile()
 
     if(!fileExist)
     {
-        return 5;
+        return 0;
     }
 
     xmlFile.FindElem();

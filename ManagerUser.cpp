@@ -18,7 +18,15 @@ User ManagerUser::enterNewUserDetails()
 {
     User user;
 
+    system("cls");
+
     user.setId(getNewUserId());
+
+    cout << "Podaj imie: ";
+    user.setName(AuxiliaryMethods::replaceFirstLetterWithCapitalLetterAndRestLowercase(AuxiliaryMethods::loadLine()));
+
+    cout << "Podaj nazwisko: ";
+    user.setSurname(AuxiliaryMethods::replaceFirstLetterWithCapitalLetterAndRestLowercase(AuxiliaryMethods::loadLine()));
 
     do
     {
@@ -60,6 +68,8 @@ void ManagerUser::viewAllUsers()
         cout << users[i].getId() << endl;
         cout << users[i].getLogin() << endl;
         cout << users[i].getPassword() << endl;
+        cout << users[i].getName() << endl;
+        cout << users[i].getSurname() << endl;
     }
 }
 
@@ -141,4 +151,26 @@ bool ManagerUser::checkIfUserIsLoggedIn()
         return true;
     else
         return false;
+}
+
+string ManagerUser::getNameOfLoggedInUser()
+{
+    for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++)
+    {
+        if (itr -> User::getId() == idOfLoggedInUser)
+        {
+            return itr -> User::getName();
+        }
+    }
+}
+
+string ManagerUser::getSurnameOfLoggedInUser()
+{
+    for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++)
+    {
+        if (itr -> User::getId() == idOfLoggedInUser)
+        {
+            return itr -> User::getSurname();
+        }
+    }
 }
