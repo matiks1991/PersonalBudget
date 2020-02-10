@@ -25,13 +25,6 @@ class ManagerBudget
     string changeCommaToDot(string amountString);
     void viewBalance(int startingDate, int endDate);
 
-
-//    void wyswietlDaneAdresata(Adresat adresat);
-    int podajIdWybranegoAdresata();
-    void podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata();
-    char wybierzOpcjeZMenuEdycja();
-//    void zaktualizujDaneWybranegoAdresata(Adresat adresat);+
-
 public:
     ManagerBudget(string FILENAMEWITHINCOMES, string FILENAMEWITHEXPENSES, int idOfLoggedInUser)
         : fileWithIncomes(FILENAMEWITHINCOMES), fileWithExpenses(FILENAMEWITHEXPENSES), ID_OF_LOGGED_IN_USER(idOfLoggedInUser)
@@ -44,10 +37,6 @@ public:
     void viewBalanceForCurrentMonth();
     void viewBalanceForPreviousMonth();
     void viewBalanceForSelectedPeriod();
-    void wyswietlWszystkichAdresatow();
-    void wczytajAdresatowZalogowanegoUzytkownikaZPliku();
-    void usunAdresata();
-    void edytujAdresata();
 };
 
 #endif

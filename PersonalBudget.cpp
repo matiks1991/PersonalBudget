@@ -115,7 +115,7 @@ void PersonalBudget::viewBalanceForPreviousMonth()
 {
     if(managerUser.checkIfUserIsLoggedIn())
     {
-//        managerBudget->viewBalanceForPreviousMonth();
+        managerBudget->viewBalanceForPreviousMonth();
     }
     else
     {
@@ -128,7 +128,7 @@ void PersonalBudget::viewBalanceForSelectedPeriod()
 {
     if(managerUser.checkIfUserIsLoggedIn())
     {
-//        managerBudget->viewBalanceForSelectedPeriod();
+        managerBudget->viewBalanceForSelectedPeriod();
     }
     else
     {

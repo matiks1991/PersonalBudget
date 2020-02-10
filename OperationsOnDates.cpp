@@ -53,8 +53,6 @@ bool OperationsOnDates::checkDateIsCorrect(string dateString)
 
     dateInt = (dateTm.tm_year+1900) * 10000 + (dateTm.tm_mon+1) * 100 + dateTm.tm_mday;
 
-    cout << "Tyle dni w tym miesiacu:" << countHowManyDaysInMonth(dateTm) << endl;
-
     if(getSystemDate()<dateInt || dateTm.tm_year<100 || dateTm.tm_mon>11 || dateTm.tm_mday>countHowManyDaysInMonth(dateTm))
         return false;
 
@@ -184,4 +182,56 @@ vector<BudgetPosition> OperationsOnDates::sortingItemsByDate(vector<BudgetPositi
     return budgetPositions;
 }
 
+int OperationsOnDates::getBeginningOfCurrentMonth()
+{
+    return getSystemDate() / 100 * 100 + 1;
+}
 
+int OperationsOnDates::getBeginningOfPreviousMonth()
+{
+    int beginningOfMonth;
+
+    if(checkIfItIsJanuary())
+    {
+        beginningOfMonth = (getSystemDate()/10000-1)*10000+1201;
+    }
+    else
+    {
+        beginningOfMonth = (getSystemDate()/100-1)*100+1;
+    }
+
+    return beginningOfMonth;
+}
+
+bool OperationsOnDates::checkIfItIsJanuary()
+{
+    return (getSystemDate()%10000) < 132;
+}
+
+int OperationsOnDates::getEndOfPreviousMonth()
+{
+    int previousMonth;
+    int endOfMonth;
+    if(checkIfItIsJanuary())
+    {
+        endOfMonth = getSystemDate() / 10000 - 1 + 1231;
+    }
+    else
+    {
+        previousMonth = (getSystemDate()/100-1) * 100;
+        endOfMonth = previousMonth + countHowManyDaysInMonth(convertDateIntToTm(previousMonth));
+    }
+
+    return endOfMonth;
+}
+
+tm OperationsOnDates::convertDateIntToTm(int dateInt)
+{
+    tm dateTm;
+
+    dateTm.tm_year = dateInt / 10000 - 1900;
+    dateTm.tm_mon = dateInt / 100 % 100 - 1;
+    dateTm.tm_mday = dateInt % 100;
+
+    return dateTm;
+}
